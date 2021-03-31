@@ -1,0 +1,285 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Calculator</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+
+   <style>
+       
+.header{
+  background: #80C683;
+}
+.header p{
+  text-align: center;
+  font-size: 16px;
+  color: #fff;
+  padding: 16px;
+  margin: 0;
+  font-weight: 700;
+}
+span{
+  color: #fff;
+  padding: 16px;
+}
+.padding-reset{
+  padding-left: 0;
+  padding-right: 0;
+  /*use for resing default padding for .row in input text section*/
+}
+.teaxtbox input[type="text"]{
+  width: 100%;
+  border: 1px solid #f1f1f1;
+  font-size: 18px;
+  font-weight: 700;
+  padding: 12px;
+}
+.teaxtbox input[type="text"]:focus{
+  outline: none;
+}
+.commonbutton input[type="button"]{
+  padding: 8px;
+  background: #f2f2f2;
+  border: none;
+  font-size: 18px;
+  font-weight: 700;
+  width: 100%;
+  margin-top: 15px;
+  border-radius: 5px;
+}
+
+.operator{
+  padding: 8px;
+  background: #f2f2f2;
+  border: none;
+  font-size: 18px;
+  font-weight: 700;
+  width: 100%;
+  margin-top: 15px;
+  border-radius: 5px;
+}
+.conflict input[type="button"]{
+  padding: 8px;
+  background: #f2f2f2;
+  border: none;
+  font-size: 18px;
+  font-weight: 700;
+  width: 100%;
+  margin-top: 15px;
+  border-radius: 5px;
+}
+.conflict input[type="submit"]:focus, .commonbutton input[type="submit"]:focus{
+  outline: none;
+}
+#del, #clear{
+  background: #F40057;
+  color: #fff;
+}
+#plus{
+  height: 97px;
+}
+#equal{
+  background: #80C683;
+  color: #fff;
+}
+
+   </style>
+  </head>
+  <body>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+          <!-- start of header section -->
+          <div class="row header">
+            <div class="col-md-2">
+              <span class="glyphicon glyphicon glyphicon-menu-hamburger"></span>
+            </div>
+            <div class="col-md-8">
+              <p>Calculator</p>
+            </div>
+            <div class="col-md-2">
+              <span class="glyphicon glyphicon glyphicon-cog"></span>
+            </div>
+          </div> <!-- header div -->
+          <!-- end of header section -->
+          <!-- start of textbox -->
+          <div class="row teaxtbox">
+            <div class="col-md-12 padding-reset">
+              <input type="text" id="display" name="display" value="">
+            </div>
+          </div>
+          <!-- end of textbox -->
+
+          <!-- start of button design -->
+          <div class="row commonbutton">
+          
+            <!-- second row -->
+            <div class="col-md-3">
+              <input type="button" name="" value="7" onclick="addText(7)">
+            </div>
+            <div class="col-md-3">
+              <input type="button" name="" value="8"  onclick="addText(8)">
+            </div>
+            <div class="col-md-3">
+              <input type="button" name="" value="9"  onclick="addText(9)">
+            </div>
+            <div class="col-md-3">
+             <button class="operator" value="div" onclick="calculate('div')">/</button>
+            </div>
+            <!-- third row -->
+            <div class="col-md-3">
+              <input type="button" name="" value="4"  onclick="addText(4)">
+            </div>
+            <div class="col-md-3">
+              <input type="button" name="" value="5"  onclick="addText(5)">
+            </div>
+            <div class="col-md-3">
+              <input type="button" name="" value="6"  onclick="addText(6)">
+            </div>
+            <div class="col-md-3">
+             <button class="operator" value="mult" onclick="calculate('mul')">X</button>
+            </div>
+            <!-- four row -->
+            <div class="col-md-3">
+              <input type="button" name="" value="1"  onclick="addText(1)">
+            </div>
+            <div class="col-md-3">
+              <input type="button" name="" value="2"  onclick="addText(2)">
+            </div>
+            <div class="col-md-3">
+              <input type="button" name="" value="3"  onclick="addText(3)">
+            </div>
+            <div class="col-md-3">
+             <button class="operator" value="min" onclick="calculate('min')">-</button>
+            </div>
+          </div> <!-- end of comonbutton div -->
+          <!-- end of button design -->
+          <!-- start of conflicting button area -->
+          <div class="row conflict">
+            <div class="col-md-12">
+              <div class="row">
+                <div class="col-md-6">
+                  <input type="button" name="" value="0" onclick="addText('0')">
+                </div>
+                <div class="col-md-3">
+                  <input type="button" name="" value="."  onclick="addText('.')">
+                </div>
+                <div class="col-md-3">
+                    <button class="operator" value="sum" onclick="calculate('sum')">+</button>
+                 </div>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="row">
+                <div class="col-md-3">
+                  <input type="button" id="del" name="" value="Del">
+                </div>
+                <div class="col-md-6">
+                  <button class="operator" id='equate' value="=" >=</button>
+                </div>
+                <div class="col-md-3">
+                    <input type="button"  name="" value="clear" id="clear">
+                  </div>
+              </div>
+            </div> <!-- end  zero, dot, del and equal sign div -->
+           
+          </div> <!-- end of conflicting area -->
+          <!-- end of conflicting button area -->
+        </div>
+      </div>
+    </div>
+
+    <script type="text/javascript">
+         var num=0;
+        var res=0;
+        var mul=1;
+        var div=1;
+        var lastSign=""
+        function addText(val){
+            var text=document.querySelector('#display')
+            text.value=text.value+val;
+        }
+
+        function calculate(sign){
+            //this does the divisional computation
+            let val=document.querySelector('#display').value
+            if(sign=="div"){
+                if (lastSign=='') {
+                    res=Number(val)
+                }else{
+                    res=Number(res)/Number(val)
+                }
+             
+                lastSign="div";
+            }
+            //this does the multiplication
+            if(sign=="mul"){
+                if (lastSign=="") {
+                    res=Number(val)
+                }else{
+                    res=Number(res)*Number(val)
+                }
+              
+                mul=res
+                lastSign="mul";
+            }
+            //here is subtraction
+            if(sign=="min"){
+                if(lastSign==""){
+                    res=Number(val)
+                }else{
+                    res=Number(res)-Number(val);
+                }
+               
+                lastSign="min"
+            }
+
+            //here is addition
+            if (sign=="sum") {
+                res=Number(val)+Number(res);
+                lastSign="sum"
+            }
+
+           document.querySelector('#display').value=""
+          
+        }
+
+      document.querySelector('#equate').addEventListener('click', function(){
+          calculate(lastSign)
+          document.querySelector('#display').value=res;
+          res=0
+          mul=1;
+          div=1;
+          lastSign=""
+      })
+      document.querySelector('#del').addEventListener('click', ()=>{
+          var str=document.querySelector('#display').value
+          document.querySelector('#display').value=str.slice(0, -1)
+      })
+      document.querySelector('#clear').addEventListener('click', ()=>{
+        document.querySelector('#display').value=""
+        var res=0;
+        var mul=1;
+        var div=1;
+        var lastSign=""
+      })
+      
+
+        // document.querySelectorAll('input[type=button]').addEventListener('click', function(){
+        //     console.log(this.value)
+        //     alert("submit clicked")
+        // })
+    </script>
+
+
+
+
+  </body>
+</html>
