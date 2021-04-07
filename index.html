@@ -131,7 +131,7 @@ span{
               <input type="button" name="" value="9"  onclick="addText(9)">
             </div>
             <div class="col-md-3">
-             <button class="operator" value="div" onclick="calculate('div')">/</button>
+             <button class="operator" value="div" onclick="addText('/')">/</button>
             </div>
             <!-- third row -->
             <div class="col-md-3">
@@ -144,7 +144,7 @@ span{
               <input type="button" name="" value="6"  onclick="addText(6)">
             </div>
             <div class="col-md-3">
-             <button class="operator" value="mult" onclick="calculate('mul')">X</button>
+             <button class="operator" value="mult" onclick="addText('*')">X</button>
             </div>
             <!-- four row -->
             <div class="col-md-3">
@@ -157,7 +157,7 @@ span{
               <input type="button" name="" value="3"  onclick="addText(3)">
             </div>
             <div class="col-md-3">
-             <button class="operator" value="min" onclick="calculate('min')">-</button>
+             <button class="operator" value="min" onclick="addText('-')">-</button>
             </div>
           </div> <!-- end of comonbutton div -->
           <!-- end of button design -->
@@ -172,7 +172,7 @@ span{
                   <input type="button" name="" value="."  onclick="addText('.')">
                 </div>
                 <div class="col-md-3">
-                    <button class="operator" value="sum" onclick="calculate('sum')">+</button>
+                    <button class="operator" value="sum" onclick="addText('+')">+</button>
                  </div>
               </div>
             </div>
@@ -197,11 +197,7 @@ span{
     </div>
 
     <script type="text/javascript">
-        var num=0;
-        var res=0;
-        var mul=1;
-        var div=1;
-        var lastSign=""
+         var num=0;
         function addText(val){
           var text=document.querySelector('#display')
           if(num!=0){
@@ -213,97 +209,26 @@ span{
            
         }
 
-        function calculate(sign){
-            //this does the divisional computation
-            let val=document.querySelector('#display').value
-
-          //  if(sign=="div"){
-                if (lastSign=='') {
-                    res=Number(val)
-                }else{
-                    res=result(lastSign, val)
-                }
-             
-                lastSign=sign;
-          //  }
-            //this does the multiplication
-            // if(sign=="mul"){
-            //     if (lastSign=="") {
-            //         res=Number(val)
-            //     }else{
-            //         res=Number(res)*Number(val)
-            //     }
-              
-            //     mul=res
-            //     lastSign="mul";
-            // }
-            // //here is subtraction
-            // if(sign=="min"){
-            //     if(lastSign==""){
-            //         res=Number(val)
-            //     }else{
-            //         res=Number(res)-Number(val);
-            //     }
-               
-            //     lastSign="min"
-            // }
-
-            // //here is addition
-            // if (sign=="sum") {
-            //     if(lastSign==""){
-            //         res=Number(val)
-            //     }else{
-            //       res=Number(val)+Number(res);
-            //     }
-              
-            //     lastSign="sum"
-            // }
-
-           document.querySelector('#display').value=""
-          
-        }
-
-
-        function result(sign, value){
-          if(sign=="sum"){
-            res=Number(res)+Number(value);
-          }else if(sign=="min"){
-            res=Number(res)-Number(value);
-          }else if(sign=="mul"){
-            res=Number(res)*Number(value)
-          }else if(sign=="div"){
-            res=Number(res)/Number(value);
-          }
-          return res;
-        }
-
       document.querySelector('#equate').addEventListener('click', function(){
-          calculate(lastSign)
-          document.querySelector('#display').value=res;
-          res=0
-          mul=1;
-          div=1;
-          lastSign=""
+          var text=document.querySelector('#display')
+          text.value=eval(text.value)
           num=0
       })
       document.querySelector('#del').addEventListener('click', ()=>{
+        if(num!=0){
           var str=document.querySelector('#display').value
           document.querySelector('#display').value=str.slice(0, -1)
+        }else{
+          document.querySelector('#display').value=""
+        }
       })
       document.querySelector('#clear').addEventListener('click', ()=>{
         document.querySelector('#display').value=""
-         res=0;
-         mul=1;
-         div=1;
-         lastSign=""
-          num=0
+       
       })
       
 
-        // document.querySelectorAll('input[type=button]').addEventListener('click', function(){
-        //     console.log(this.value)
-        //     alert("submit clicked")
-        // })
+    
     </script>
 
 
