@@ -14,7 +14,7 @@
    <style>
        
 .header{
-  background: #80C683;
+  background: #141414;
 }
 .header p{
   text-align: center;
@@ -197,58 +197,84 @@ span{
     </div>
 
     <script type="text/javascript">
-         var num=0;
+        var num=0;
         var res=0;
         var mul=1;
         var div=1;
         var lastSign=""
         function addText(val){
-            var text=document.querySelector('#display')
+          var text=document.querySelector('#display')
+          if(num!=0){
             text.value=text.value+val;
+          }else{
+            num=val
+            text.value=val;
+          }
+           
         }
 
         function calculate(sign){
             //this does the divisional computation
             let val=document.querySelector('#display').value
-            if(sign=="div"){
+
+          //  if(sign=="div"){
                 if (lastSign=='') {
                     res=Number(val)
                 }else{
-                    res=Number(res)/Number(val)
+                    res=result(lastSign, val)
                 }
              
-                lastSign="div";
-            }
+                lastSign=sign;
+          //  }
             //this does the multiplication
-            if(sign=="mul"){
-                if (lastSign=="") {
-                    res=Number(val)
-                }else{
-                    res=Number(res)*Number(val)
-                }
+            // if(sign=="mul"){
+            //     if (lastSign=="") {
+            //         res=Number(val)
+            //     }else{
+            //         res=Number(res)*Number(val)
+            //     }
               
-                mul=res
-                lastSign="mul";
-            }
-            //here is subtraction
-            if(sign=="min"){
-                if(lastSign==""){
-                    res=Number(val)
-                }else{
-                    res=Number(res)-Number(val);
-                }
+            //     mul=res
+            //     lastSign="mul";
+            // }
+            // //here is subtraction
+            // if(sign=="min"){
+            //     if(lastSign==""){
+            //         res=Number(val)
+            //     }else{
+            //         res=Number(res)-Number(val);
+            //     }
                
-                lastSign="min"
-            }
+            //     lastSign="min"
+            // }
 
-            //here is addition
-            if (sign=="sum") {
-                res=Number(val)+Number(res);
-                lastSign="sum"
-            }
+            // //here is addition
+            // if (sign=="sum") {
+            //     if(lastSign==""){
+            //         res=Number(val)
+            //     }else{
+            //       res=Number(val)+Number(res);
+            //     }
+              
+            //     lastSign="sum"
+            // }
 
            document.querySelector('#display').value=""
           
+        }
+
+
+        function result(sign, value){
+          if(sign=="sum"){
+            res=Number(res)+Number(value);
+          }else if(sign=="min"){
+            res=Number(res)-Number(value);
+          }else if(sign=="mul"){
+            res=Number(res)*Number(value)
+          }else if(sign=="div"){
+            res=Number(res)/Number(value);
+          }
+          return res;
         }
 
       document.querySelector('#equate').addEventListener('click', function(){
@@ -258,6 +284,7 @@ span{
           mul=1;
           div=1;
           lastSign=""
+          num=0
       })
       document.querySelector('#del').addEventListener('click', ()=>{
           var str=document.querySelector('#display').value
@@ -265,10 +292,11 @@ span{
       })
       document.querySelector('#clear').addEventListener('click', ()=>{
         document.querySelector('#display').value=""
-        var res=0;
-        var mul=1;
-        var div=1;
-        var lastSign=""
+         res=0;
+         mul=1;
+         div=1;
+         lastSign=""
+          num=0
       })
       
 
